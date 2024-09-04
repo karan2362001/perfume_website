@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume E-commerce - Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'icons8-favicon-16.png' %}" type="image/png">
+
+    <style>
+        /* Custom styles for animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Custom styles for gradient text */
+        .gradient-text {
+            background: linear-gradient(90deg, #d4af37, #c5b358);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Custom styles for buttons */
+        .btn-royal-green {
+            background-color: #014421; /* Royal green */
+            border: 2px solid #d4af37; /* Golden border */
+            color: white;
+        }
+
+        .btn-royal-green:hover {
+            background-color: #013b1e; /* Darker royal green */
+        }
+
+        /* Custom styles for the form */
+        .input-field {
+            border: 2px solid #d4af37;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #c5b358;
+        }
+
+    </style>
+</head>
+<body class="bg-beige-100 font-sans">
+
+    <!-- Navbar -->
+    <nav class="bg-beige-80 shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-plum-800">Perfume Shop</div>
+            <div>
+                <a href="#" class="text-plum-700 hover:text-gold-500 px-4 transition duration-300">Home</a>
+                <a href="#" class="text-plum-700 hover:text-gold-500 px-4 transition duration-300">Products</a>
+                <a href="#" class="text-plum-700 hover:text-gold-500 px-4 transition duration-300">Contact</a>
+                <a href="#" class="text-plum-700 hover:text-gold-500 px-4 transition duration-300">Login</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Registration Section -->
+    <section class="flex items-center justify-center h-screen fade-in">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+            <h2 class="text-4xl font-bold text-center mb-6 text-plum-800">Register</h2>
+            <form method="POST" >
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="username" class="block text-plum-700 mb-2">Username</label>
+                    <input type="text" id="username" name="username" class="input-field w-full" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password1" class="block text-plum-700 mb-2">Password</label>
+                    <input type="password" id="password1" name="password1" class="input-field w-full" required>
+                </div>
+                <div class="mb-6">
+                    <label for="password2" class="block text-plum-700 mb-2">Confirm Password</label>
+                    <input type="password" id="password2" name="password2" class="input-field w-full" required>
+                </div>
+                <button type="submit" class="btn-royal-green w-full py-2 rounded transition duration-300">Register</button>
+            </form>
+            <p class="text-center text-plum-600 mt-6">Already have an account? <a href="{% url 'login_page' %}" class="text-plum-700 hover:text-gold-500 transition duration-300">Login</a></p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-plum-800 text-beige-50 py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Perfume Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

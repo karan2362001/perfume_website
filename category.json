@@ -1,0 +1,17 @@
+[
+    {
+        "category_name": "Men's Fragrances",
+        "description": "A collection of perfumes designed for men, offering a variety of scents ranging from woody to fresh."
+      
+    },
+    {
+        "category_name": "Women's Fragrances",
+        "description": "Explore our range of perfumes for women, from floral to oriental scents."
+    
+    },
+    {
+        "category_name": "Unisex Fragrances",
+        "description": "Our unisex collection includes perfumes that appeal to both men and women."
+        
+    }
+]

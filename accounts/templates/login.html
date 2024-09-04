@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfume E-commerce - Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" href="{% static 'icons8-favicon-16.png' %}" type="image/png">
+    <style>
+        .btn-royal-green {
+            background-color: #014421;
+            border: 2px solid #d4af37;
+            color: white;
+        }
+        .btn-royal-green:hover {
+            background-color: #013b1e;
+        }
+        .input-field {
+            border: 2px solid #d4af37;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #c5b358;
+        }
+        .error-message {
+            color: #ff0000;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body class="bg-beige-100 font-sans">
+
+    <nav class="bg-beige-80 shadow-md fixed w-full z-10">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-plum-800">Perfume Shop</div>
+            <div id="navbarLinks">
+                <!-- Dynamic links go here -->
+            </div>
+        </div>
+    </nav>
+
+    <section class="flex items-center justify-center h-screen">
+        <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-sm">
+            <h2 class="text-4xl font-bold text-center mb-6 text-plum-800">Login</h2>
+            <form id="loginForm">
+                {% csrf_token %}
+                <div class="mb-4">
+                    <label for="username" class="block text-plum-700 mb-2">Username</label>
+                    <input type="text" id="username" name="username" class="input-field w-full" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-plum-700 mb-2">Password</label>
+                    <input type="password" id="password" name="password" class="input-field w-full" required>
+                </div>
+                <div id="error-message" class="error-message mb-4"></div>
+                <button type="submit" class="btn-royal-green w-full py-2 rounded transition duration-300">Login</button>
+            </form>
+            <p class="text-center text-plum-600 mt-6">Don't have an account? <a href="{% url 'signup_page' %}" class="text-plum-700 hover:text-gold-500 transition duration-300">Sign Up</a></p>
+        </div>
+    </section>
+
+    <footer class="bg-plum-800 text-beige-50 py-4">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2024 Perfume Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                handleLogin();
+            });
+
+            function handleLogin() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+// Example of storing tokens after successful login
+
+                axios.post('/api/login/', { username, password })
+                    .then(response => {
+                        localStorage.setItem('access_token', response.data.access_token);
+                         localStorage.setItem('refresh_token', response.data.refresh_token);
+                        alert('Login successful.');
+                        window.location.href = '/'; // Redirect to homepage or desired location
+                    })
+                    .catch(error => {
+                        console.error('Login failed:', error.response?.data || error.message);
+                        document.getElementById('error-message').textContent = 'Login failed. Please check your credentials.';
+                    });
+            }
+        });
+    </script>
+</body>
+</html>
